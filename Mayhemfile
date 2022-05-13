@@ -1,0 +1,6 @@
+project: rnshah9/playground
+target: playground
+
+cmds:
+  - cmd: /repo/huo @@
+    filepath: /test.huo
