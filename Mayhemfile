@@ -1,5 +1,5 @@
-project: rnshah9/playground
-target: playground
+project: rnshah9/mayhem-huo
+target: huo
 
 cmds:
   - cmd: /repo/huo @@
