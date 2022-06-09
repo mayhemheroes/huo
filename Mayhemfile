@@ -1,6 +1,6 @@
-project: rnshah9/mayhem-huo
+project: huo
 target: huo
 
 cmds:
-  - cmd: /repo/huo @@
+  - cmd: /repo/huo /test.huo
     filepath: /test.huo
