@@ -2,5 +2,4 @@ project: huo
 target: huo
 
 cmds:
-  - cmd: /repo/huo /test.huo
-    filepath: /test.huo
+  - cmd: /huo @@
