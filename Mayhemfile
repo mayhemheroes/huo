@@ -1,0 +1,5 @@
+project: huo
+target: huo
+
+cmds:
+  - cmd: /huo @@
