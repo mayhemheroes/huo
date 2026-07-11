@@ -1,0 +1,21 @@
+project: huo
+target: huo
+
+# File-input (CLI) target: feed the fuzz bytes as a .huo program to the huo interpreter, which
+# TOKENIZES (src/tokenizer.c), PARSES into an AST (src/parser.c), and EXECUTES it
+# (src/execute.c + src/execution_functions/*). The whole interpreter pipeline runs on the input — the
+# natural fuzz surface — so there is no libFuzzer harness; the interpreter binary itself is the target.
+# @@ is the input-file placeholder.
+#
+# Ported from the old fork integration's single target (old: /repo/huo on a fixed /test.huo path);
+# the new target is /mayhem/huo on Mayhem's @@ input file. huo reads the program from a CLI path arg
+# (main() in src/huo.c), so the bytes drive tokenize+parse+execute directly. A valid program runs to
+# exit 0 (passing test case); malformed input is caught by huo's own error handling (exit 1), so Mayhem
+# obtains a passing seed and explores from there. ASan (leak detection baked off via
+# __asan_default_options) + UBSan are both ON and HALTING, so a real memory/UB defect terminates the
+# process (SIGABRT) and is recorded as a crash.
+cmds:
+  - cmd: /mayhem/huo @@
+testsuite:
+  - https://$MAYHEM_DOMAIN/$MAYHEM_PROJECT/$MAYHEM_TARGET/testsuite.tar
+  - file://mayhem/huo/testsuite
